@@ -5,10 +5,13 @@ total_credits = sum(Credits)
 
 st.title('CGPA Calculator')
 
+st.markdown('---')
 num_courses = st.number_input('Number of Sems', min_value=1, step=1, value=5)
 
+
 if st.checkbox('Add Custom Credits'):
-    st.write('Credits for each semester added by default is what is followed in GEC Computer curriculum. You can add your own credits below:')
+
+    st.write('The default credits for each semester are based on the GEC Computer curriculum. You may customize the credits below as per your requirements:')
     st.subheader('Enter your Custom Credits below:')
     creds = []
     for i in range(num_courses):
@@ -16,6 +19,8 @@ if st.checkbox('Add Custom Credits'):
         creds.append(credit)
     Credits = creds
     total_credits = sum(Credits)
+
+st.markdown('---')
 
 st.subheader('Enter your SGPA below:')
 
@@ -26,8 +31,26 @@ for i in range(num_courses):
 
 total_grade = sum([a*b for a,b in zip(grades, Credits)])
 cgpa = total_grade/total_credits
+st.markdown('---')
 
 st.subheader(f'Your CGPA is: {cgpa:.2f}')
 
 gdrive_link = "https://drive.google.com/file/d/1JyIgnGSZpeBphGtcoDdaj8eXnVvROFb8/view?usp=drivesdk"
 st.markdown(f"[View CGPA Calculation Guide]({gdrive_link})")
+
+st.markdown('---')
+import matplotlib.pyplot as plt
+with st.expander("Trend"):
+    st.subheader('SGPA Trend')
+
+    fig, ax = plt.subplots()
+    ax.plot(range(1, num_courses + 1), grades, marker='o', linestyle='-', color='b')
+    ax.set_xlabel('Semester')
+    ax.set_ylabel('SGPA')
+    ax.set_title('SGPA Trend Over Semesters')
+    ax.grid(True)
+    ax.set_ylim(0, 10)  # Set y-axis to start from 0 and end at 10
+    ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
+
+    st.pyplot(fig)
+# st.write('Made with ❤️ by Akaash Samson')
