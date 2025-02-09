@@ -1,6 +1,5 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import webbrowser
+# import pandas as pd
 
 
 Credits = [16, 18, 23, 24, 22, 0, 0, 0]
@@ -39,21 +38,14 @@ st.markdown('---')
 st.subheader(f'Your CGPA is: {cgpa:.2f}')
 
 gdrive_link = "https://drive.google.com/file/d/1JyIgnGSZpeBphGtcoDdaj8eXnVvROFb8/view?usp=drivesdk"
-if st.button('View CGPA Calculation Guide'):
-    webbrowser.open_new_tab(gdrive_link)
-    
+st.markdown(f"[View CGPA Calculation Guide]({gdrive_link})")
+
 st.markdown('---')
-with st.expander("Trend"):
-    st.subheader('SGPA Trend')
+# with st.expander("Trend"):
+#     st.subheader('SGPA Trend')
 
-    fig, ax = plt.subplots()
-    ax.plot(range(1, num_courses + 1), grades, marker='o', linestyle='-', color='b')
-    ax.set_xlabel('Semester')
-    ax.set_ylabel('SGPA')
-    ax.set_title('SGPA Trend Over Semesters')
-    ax.grid(True)
-    ax.set_ylim(0, 10)  # Set y-axis to start from 0 and end at 10
-    ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
+#     semesters = [x for x in range(1, num_courses+1)]
+#     df = pd.DataFrame({'Semester': semesters, 'SGPA': grades})
+#     st.line_chart(df, x='Semester', y='SGPA', use_container_width=True)
 
-    st.pyplot(fig)
 # st.write('Made with ❤️ by Akaash Samson')
