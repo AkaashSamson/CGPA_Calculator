@@ -1,11 +1,9 @@
 import streamlit as st
-import webbrowser
 
 Credits = [16, 18, 23, 24, 22, 0, 0, 0]
 total_credits = sum(Credits)
 
 st.title('CGPA Calculator')
-
 
 num_courses = st.number_input('Number of Sems', min_value=1, step=1, value=5)
 
@@ -32,5 +30,4 @@ cgpa = total_grade/total_credits
 st.subheader(f'Your CGPA is: {cgpa:.2f}')
 
 gdrive_link = "https://drive.google.com/file/d/1JyIgnGSZpeBphGtcoDdaj8eXnVvROFb8/view?usp=drivesdk"
-if st.button('View CGPA Calculation Guide'):
-    webbrowser.open_new_tab(gdrive_link)
+st.markdown(f"[View CGPA Calculation Guide]({gdrive_link})")
